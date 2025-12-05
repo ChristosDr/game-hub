@@ -15,9 +15,10 @@ import React from "react";
 
 interface Props {
   onSelectGenre: (genre: Genre) => void;
+  selectedGenre: Genre | null;
 }
 
-const GenreList = ({ onSelectGenre }: Props) => {
+const GenreList = ({ onSelectGenre, selectedGenre }: Props) => {
   const { data, error, isLoading } = useGenres();
 
   if (isLoading) return <Spinner></Spinner>;
@@ -33,6 +34,7 @@ const GenreList = ({ onSelectGenre }: Props) => {
               src={getCroppedImageUrl(genre.image_background)}
             ></Image>
             <Button
+              fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
               whiteSpace="normal"
               textAlign="left"
               onClick={() => onSelectGenre(genre)}
